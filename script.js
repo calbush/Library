@@ -32,24 +32,79 @@ function createLibraryEntry(){
     })
 }
 
-//Function to add Book objects as DOM elements
+//Function to add Book objects as DOM elements; Uses last element in myLibrary array, called upon new object being added to myLibrary.
 function addBooktoTable(){
     for (let book = (myLibrary.length - 1); book < myLibrary.length; book++){
         let tblTitle = document.createElement('div');
+        tblTitle.classList.add('delete');
         libraryTable.appendChild(tblTitle);
         tblTitle.textContent = myLibrary[book].title;
 
         let tblAuthor = document.createElement('div');
+        tblAuthor.classList.add('delete');
         libraryTable.appendChild(tblAuthor);
         tblAuthor.textContent = myLibrary[book].author;
 
         let tblPages = document.createElement('div');
+        tblPages.classList.add('delete');
         libraryTable.appendChild(tblPages);
         tblPages.textContent = myLibrary[book].pages;
 
         let tblRead = document.createElement('div');
+        tblRead.classList.add('delete');
         libraryTable.appendChild(tblRead);
         tblRead.textContent = myLibrary[book].read;
+
+        let tblRemove = document.createElement('button');
+        libraryTable.appendChild(tblRemove);
+        tblRemove.classList.add('remove', myLibrary[book].pages, 'delete');
+        tblRemove.textContent = 'Remove';
+        tblRemove.addEventListener('click', (e) => {
+            removeBook(e.target.classList[1]); 
+        })
+    }
+}
+
+//iterate through library, remove corresponding book object from library that matches the clicked button.
+function removeBook(removeBtnClass) {
+    let rmvNodeList = document.querySelectorAll('.delete');
+    for (element of rmvNodeList){
+        element.remove();
+    }
+
+    for (let i = 0; i < myLibrary.length; i++){
+        if (removeBtnClass == myLibrary[i].pages){
+            myLibrary.splice(i, 1);
+        }
+    }
+    for (book of myLibrary){
+        let tblTitle = document.createElement('div');
+        tblTitle.classList.add('delete');
+        libraryTable.appendChild(tblTitle);
+        tblTitle.textContent = book.title;
+
+        let tblAuthor = document.createElement('div');
+        tblAuthor.classList.add('delete');
+        libraryTable.appendChild(tblAuthor);
+        tblAuthor.textContent = book.author;
+
+        let tblPages = document.createElement('div');
+        tblPages.classList.add('delete');
+        libraryTable.appendChild(tblPages);
+        tblPages.textContent = book.pages;
+
+        let tblRead = document.createElement('div');
+        tblRead.classList.add('delete');
+        libraryTable.appendChild(tblRead);
+        tblRead.textContent = book.read;
+
+        let tblRemove = document.createElement('button');
+        libraryTable.appendChild(tblRemove);
+        tblRemove.classList.add('remove', book.pages, 'delete');
+        tblRemove.textContent = 'Remove';
+        tblRemove.addEventListener('click', (e) => {
+            removeBook(e.target.classList[1]); 
+        })
     }
 }
 
