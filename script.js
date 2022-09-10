@@ -14,13 +14,28 @@ const bookBtn = document.querySelector('#addBookBtn');
 
 let submitInitiator = true;
 
+let Book = class {
+    constructor(title, author, pages, read) {
+        this.title = title;
+        this.author = author;
+        this.pages = pages;
+        this.read = read;
+    }
+}
+
+
+
 //Book Constructor
+
+/*
 function Book(title, author, pages, read) {
     this.title = title;
     this.author = author;
     this.pages = pages;
     this.read = read;
 }
+*/
+
 //User hits submit button, create book object and add to library
 function createLibraryEntry(){
     if (submitInitiator){
@@ -71,7 +86,7 @@ function addBooktoTable(){
     }
 }
 
-//iterate through library, remove corresponding book object from library that matches the clicked button.
+//iterate through library, remove corresponding book object from library that matches the clicked remove button.
 function removeBook(removeBtnClass) {
     let rmvNodeList = document.querySelectorAll('.delete');
     for (element of rmvNodeList){
